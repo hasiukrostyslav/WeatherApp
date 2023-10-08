@@ -9,9 +9,9 @@ function CurrentWeather() {
 
   return (
     <DashboardBlock type="top" value="Current Weather">
-      <div className="flex px-5 pb-8 pt-5 flex-wrap">
-        <div className="pr-9 w-[400px]">
-          <p className="text-lg text-sky-600 font-semibold">Lviv</p>
+      <div className="flex flex-col md:flex-row px-5 pb-8 pt-5 items-center gap-5">
+        <div className="md:mr-20">
+          <p className="text-xl text-sky-600 font-semibold">Lviv</p>
           <div className="flex items-center mt-4 mb-3 gap-7">
             <div className="text-7xl text-sky-500">
               <BsFillCloudDrizzleFill/>
