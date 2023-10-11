@@ -2,7 +2,7 @@ type ButtonProps = {
   children: React.ReactNode;
   useType: 'theme' | 'search' | 'location';
   type?: 'submit';
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 function Button({ useType, type, onClick, children }: ButtonProps) {
