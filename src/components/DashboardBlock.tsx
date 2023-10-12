@@ -1,7 +1,7 @@
 type DashboardBlockProps = {
   children: React.ReactNode;
   type: 'top' | 'bottom';
-  value: string;
+  value?: string;
 };
 
 function DashboardBlock({ type, value, children }: DashboardBlockProps) {

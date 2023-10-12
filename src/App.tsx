@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import Image from './components/Image';
+// import Spinner from './components/Spinner';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -25,6 +26,7 @@ function App() {
         <Header theme={theme} setTheme={setTheme} />
         <SearchForm />
         <Dashboard />
+        {/* <Spinner theme={theme} /> */}
       </Container>
       <Image theme={theme} />
     </>

@@ -6,12 +6,6 @@ function WeeksWeather() {
     <DashboardBlock type="bottom" value="7-Day Weather Forecast">
       <ul className="flex flex-col md:flex-row justify-between lg:gap-4 ">
         <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
       </ul>
     </DashboardBlock>
   );

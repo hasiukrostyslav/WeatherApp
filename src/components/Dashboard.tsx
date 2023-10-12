@@ -1,15 +1,18 @@
 import CurrentWeather from './CurrentWeather';
+// import DashboardBlock from './DashboardBlock';
+// import Error from './Error';
+
 import WeeksWeather from './WeeksWeather';
-import Error from './Error';
-import Loading from './Loading';
 
 function Dashboard() {
   return (
     <section className="relative h-4/5">
       <CurrentWeather />
       <WeeksWeather />
-      {/* <Loading /> */}
-      {/* <Error /> */}
+
+      {/* <DashboardBlock type="top">
+        <Error />
+      </DashboardBlock> */}
     </section>
   );
 }

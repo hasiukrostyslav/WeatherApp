@@ -1,6 +1,6 @@
 function Error() {
   return (
-    <p className="text-2xl top-1/2 absolute left-1/2 -translate-y-1/2 -translate-x-1/2 text-blue-900">
+    <p className="text-2xl text-blue-900 dark:text-blue-200 text-center">
       Something went wrong! Please try again!
     </p>
   );

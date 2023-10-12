@@ -3,7 +3,11 @@ type ContainerProps = {
 };
 
 function Container({ children }: ContainerProps) {
-  return <div className="mx-auto w-max py-6 relative h-full">{children}</div>;
+  return (
+    <div className="flex flex-col justify-center mx-auto w-max py-6 relative min-h-screen md:min-w-[700px]">
+      {children}
+    </div>
+  );
 }
 
 export default Container;
