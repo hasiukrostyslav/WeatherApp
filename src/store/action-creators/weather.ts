@@ -14,25 +14,31 @@ export function fetchWeather(location: string | null, coords?: Location) {
 
       let latitude, longitude, locationName;
 
-      if (location) locationName = getCapitalLocation(location);
+      if (location) locationName = location;
       if (!location) {
         const res = await fetch(
           `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coords?.latitude}&longitude=${coords?.longitude}`
         );
         const data = await res.json();
-        locationName = getCapitalLocation(data.city);
+        console.log(data);
+        locationName = data.city;
+        console.log(locationName);
       }
 
       if (!coords) {
         const resCoords = await fetch(
-          `${BASE_URL_COORDS}?name=${location}&count=10&language=en&format=json`
+          `${BASE_URL_COORDS}?name=${locationName}&count=10&language=en&format=json`
         );
         const cityInfo = await resCoords.json();
         latitude = cityInfo.results.at(0).latitude;
         longitude = cityInfo.results.at(0).longitude;
         dispatch({
           type: ActionType.WEATHER_COORDS,
-          payload: { locationName: locationName || '', latitude, longitude },
+          payload: {
+            locationName: getCapitalLocation(locationName) || '',
+            latitude,
+            longitude,
+          },
         });
       }
 
@@ -41,7 +47,11 @@ export function fetchWeather(location: string | null, coords?: Location) {
         longitude = coords.longitude;
         dispatch({
           type: ActionType.WEATHER_COORDS,
-          payload: { locationName: locationName || '', latitude, longitude },
+          payload: {
+            locationName: getCapitalLocation(locationName) || '',
+            latitude,
+            longitude,
+          },
         });
       }
 
