@@ -1,16 +1,25 @@
 import WeatherIcon from './WeatherIcon';
 
-function Item() {
+interface ItemProps {
+  day: string;
+  code: number;
+  maxTemp: number;
+  minTemp: number;
+}
+
+function Item({ day, code, maxTemp, minTemp }: ItemProps) {
   return (
     <li className="flex items-center justify-center flex-col gap-2">
       <p className="text-lg text-sky-600 dark:text-sky-400 font-semibold">
-        Sun
+        {day}
       </p>
       <span className="text-7xl text-sky-600">
-        <WeatherIcon code={71} />
+        <WeatherIcon code={code} />
       </span>
       <p className="text-sky-700 dark:text-sky-500 text-lg">
-        18<sup>°</sup>/8<sup>°</sup>
+        {maxTemp}
+        <sup>°</sup>/{minTemp}
+        <sup>°</sup>
       </p>
     </li>
   );

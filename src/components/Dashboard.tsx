@@ -6,7 +6,7 @@ import Error from './Error';
 import WeeksWeather from './WeeksWeather';
 
 function Dashboard() {
-  const status = useTypedSelector((state) => state.status);
+  const { status } = useTypedSelector((state) => state.weather);
   return (
     <section className="relative h-4/5">
       {status === 'active' && (

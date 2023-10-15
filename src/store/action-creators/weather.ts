@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { ActionType, WeatherActions } from '../types/types';
-import { getCapitalLocation } from '../../helper';
+import { getCapitalLocation, formatDailyWeather } from '../../helper';
 import {
   BASE_URL_COORDS,
   BASE_URL_WEATHER,
@@ -29,25 +29,23 @@ export function fetchWeather(location: string) {
       );
 
       const data = await resWeather.json();
+      const { current, daily } = data;
 
       setTimeout(() => {
         dispatch({
           type: ActionType.WEATHER_SUCCESS,
           payload: {
-            temperature: data.current.temperature_2m,
-            apparentTemperature: data.current.apparent_temperature,
-            weatherCode: data.current.weathercode,
-            sunrise: data.daily.sunrise.at(0),
-            sunset: data.daily.sunset.at(0),
-            humidity: data.current.relativehumidity_2m,
-            windSpeed: data.current.windspeed_10m,
-            pressure: data.current.surface_pressure,
-            uvIndex: data.daily.uv_index_max.at(0),
-            isDay: Boolean(data.current.is_day),
-            dailyWeather: {
-              days: data.daily.time.slice(1, 8),
-              weatherCode: data.daily.weathercode.slice(1, 8),
-            },
+            temperature: Number.parseInt(current.temperature_2m),
+            apparentTemperature: Number.parseInt(current.apparent_temperature),
+            weatherCode: current.weathercode,
+            humidity: current.relativehumidity_2m,
+            windSpeed: current.windspeed_10m,
+            pressure: current.surface_pressure,
+            isDay: Boolean(current.is_day),
+            sunrise: new Date(daily.sunrise.at(0)),
+            sunset: new Date(daily.sunset.at(0)),
+            uvIndex: daily.uv_index_max.at(0),
+            dailyWeather: formatDailyWeather(daily),
           },
         });
       }, 500);

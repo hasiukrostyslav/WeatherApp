@@ -9,7 +9,7 @@ import Spinner from './components/Spinner';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const status = useTypedSelector((state) => state.status);
+  const { status } = useTypedSelector((state) => state.weather);
 
   useEffect(() => {
     if (

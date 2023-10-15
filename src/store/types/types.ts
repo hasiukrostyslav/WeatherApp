@@ -1,6 +1,8 @@
-type DailyWeather = {
-  days: string[];
-  weatherCode: number[];
+export type DailyWeather = {
+  day: string;
+  weatherCode: number;
+  maxTemperature: number;
+  minTemperature: number;
 };
 
 export interface InitialState {
@@ -11,14 +13,14 @@ export interface InitialState {
   temperature: null | number;
   apparentTemperature: null | number;
   weatherCode: null | number;
-  sunrise: string;
-  sunset: string;
+  sunrise: Date | null;
+  sunset: Date | null;
   humidity: null | number;
   windSpeed: null | number;
   pressure: null | number;
   uvIndex: null | number;
-  isDay: boolean;
-  dailyWeather: DailyWeather | null;
+  isDay: boolean | null;
+  dailyWeather: DailyWeather[] | null;
 }
 
 export enum ActionType {
@@ -47,14 +49,14 @@ interface WeatherSuccessAction {
     temperature: number;
     apparentTemperature: number;
     weatherCode: number;
-    sunrise: string;
-    sunset: string;
+    sunrise: Date;
+    sunset: Date;
     humidity: number;
     windSpeed: number;
     pressure: number;
     uvIndex: number;
     isDay: boolean;
-    dailyWeather: DailyWeather;
+    dailyWeather: DailyWeather[];
   };
 }
 
@@ -67,3 +69,13 @@ export type WeatherActions =
   | WeatherCoordsAction
   | WeatherErrorAction
   | WeatherSuccessAction;
+
+export interface WeatherDailyData {
+  sunrise: string[];
+  sunset: string[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+  time: string[];
+  weathercode: number[];
+  uv_index_max: number[];
+}

@@ -8,13 +8,13 @@ const initialState: InitialState = {
   temperature: null,
   apparentTemperature: null,
   weatherCode: null,
-  sunrise: '',
-  sunset: '',
+  sunrise: null,
+  sunset: null,
   humidity: null,
   windSpeed: null,
   pressure: null,
   uvIndex: null,
-  isDay: true,
+  isDay: null,
   dailyWeather: null,
 };
 

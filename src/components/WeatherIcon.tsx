@@ -14,7 +14,7 @@ import DrizzleIcon from '../assets/drizzle.svg?react';
 import FogIcon from '../assets/fog.svg?react';
 
 type WeatherIconProps = {
-  code: number;
+  code: number | null;
 };
 
 function WeatherIcon({ code }: WeatherIconProps) {

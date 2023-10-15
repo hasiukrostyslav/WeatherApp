@@ -34,5 +34,16 @@ export const WEATHER_TYPES = {
 
 export const BASE_URL_COORDS = 'https://geocoding-api.open-meteo.com/v1/search';
 export const BASE_URL_WEATHER = 'https://api.open-meteo.com/v1/forecast';
+
 export const WEATHER_URL_PARAMS =
-  'current=temperature_2m,relativehumidity_2m,apparent_temperature,is_day,weathercode,surface_pressure,windspeed_10m&daily=weathercode,sunrise,sunset,uv_index_max&timezone=Europe%2FBerlin&forecast_days=14';
+  'current=temperature_2m,relativehumidity_2m,apparent_temperature,is_day,weathercode,surface_pressure,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&timezone=Europe%2FMoscow&forecast_days=14';
+
+export const DAYS = {
+  0: 'SUN',
+  1: 'MON',
+  2: 'TUE',
+  3: 'WED',
+  4: 'THU',
+  5: 'FRI',
+  6: 'SAT',
+};
