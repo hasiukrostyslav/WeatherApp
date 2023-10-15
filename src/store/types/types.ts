@@ -79,3 +79,8 @@ export interface WeatherDailyData {
   weathercode: number[];
   uv_index_max: number[];
 }
+
+export interface Location {
+  latitude: number;
+  longitude: number;
+}
