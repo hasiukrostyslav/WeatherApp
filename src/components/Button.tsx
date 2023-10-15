@@ -1,8 +1,8 @@
 type ButtonProps = {
   children: React.ReactNode;
   useType: 'theme' | 'search' | 'location';
-  type?: 'submit';
-  onClick?: () => void;
+  type?: 'submit' | 'button';
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 function Button({ useType, type, onClick, children }: ButtonProps) {

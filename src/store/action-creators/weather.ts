@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { ActionType, WeatherActions } from '../types/types';
+import { ActionType, Location, WeatherActions } from '../types/types';
 import { getCapitalLocation, formatDailyWeather } from '../../helper';
 import {
   BASE_URL_COORDS,
@@ -7,22 +7,43 @@ import {
   WEATHER_URL_PARAMS,
 } from '../../data';
 
-export function fetchWeather(location: string) {
+export function fetchWeather(location: string | null, coords?: Location) {
   return async (dispatch: Dispatch<WeatherActions>) => {
     try {
       dispatch({ type: ActionType.WEATHER_LOADING });
 
-      const resCoords = await fetch(
-        `${BASE_URL_COORDS}?name=${location}&count=10&language=en&format=json`
-      );
-      const cityInfo = await resCoords.json();
+      let latitude, longitude, locationName;
 
-      const { latitude, longitude } = cityInfo.results.at(0);
-      const locationName = getCapitalLocation(location);
-      dispatch({
-        type: ActionType.WEATHER_COORDS,
-        payload: { locationName, latitude, longitude },
-      });
+      if (location) locationName = getCapitalLocation(location);
+      if (!location) {
+        const res = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coords?.latitude}&longitude=${coords?.longitude}`
+        );
+        const data = await res.json();
+        locationName = getCapitalLocation(data.city);
+      }
+
+      if (!coords) {
+        const resCoords = await fetch(
+          `${BASE_URL_COORDS}?name=${location}&count=10&language=en&format=json`
+        );
+        const cityInfo = await resCoords.json();
+        latitude = cityInfo.results.at(0).latitude;
+        longitude = cityInfo.results.at(0).longitude;
+        dispatch({
+          type: ActionType.WEATHER_COORDS,
+          payload: { locationName: locationName || '', latitude, longitude },
+        });
+      }
+
+      if (coords) {
+        latitude = coords.latitude;
+        longitude = coords.longitude;
+        dispatch({
+          type: ActionType.WEATHER_COORDS,
+          payload: { locationName: locationName || '', latitude, longitude },
+        });
+      }
 
       const resWeather = await fetch(
         `${BASE_URL_WEATHER}?latitude=${latitude}&longitude=${longitude}&${WEATHER_URL_PARAMS}`

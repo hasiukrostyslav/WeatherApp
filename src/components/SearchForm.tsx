@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { IoSearchOutline, IoLocateOutline } from 'react-icons/io5';
 import { useAction } from '../hooks/useAction';
 import Button from './Button';
+import { Location } from '../store/types/types';
 
 function SearchForm() {
   const [locationName, setLocationName] = useState<string>('');
+  const [coordinates, setCoordinates] = useState<Location>();
   const { fetchWeather } = useAction();
 
-  function submitHandler(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!locationName) return;
@@ -16,8 +18,25 @@ function SearchForm() {
     setLocationName('');
   }
 
+  function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { coords } = pos;
+
+      setCoordinates({
+        ...coordinates,
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      });
+    });
+
+    fetchWeather(null, coordinates);
+    setLocationName('');
+  }
+
   return (
-    <form className="relative mb-6" onSubmit={submitHandler}>
+    <form className="relative mb-6" onSubmit={handleSubmit}>
       <Button type="submit" useType="search">
         <IoSearchOutline />
       </Button>
@@ -29,7 +48,7 @@ function SearchForm() {
         onChange={(e) => setLocationName(e.target.value)}
       ></input>
 
-      <Button useType="location">
+      <Button type="button" useType="location" onClick={handleClick}>
         <IoLocateOutline />
       </Button>
     </form>
