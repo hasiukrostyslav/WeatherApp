@@ -31,3 +31,8 @@ export const WEATHER_TYPES = {
   101: 'Overcast',
   102: 'Rain',
 };
+
+export const BASE_URL_COORDS = 'https://geocoding-api.open-meteo.com/v1/search';
+export const BASE_URL_WEATHER = 'https://api.open-meteo.com/v1/forecast';
+export const WEATHER_URL_PARAMS =
+  'current=temperature_2m,relativehumidity_2m,apparent_temperature,is_day,weathercode,surface_pressure,windspeed_10m&daily=weathercode,sunrise,sunset,uv_index_max&timezone=Europe%2FBerlin&forecast_days=14';

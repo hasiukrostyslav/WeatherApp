@@ -1,18 +1,26 @@
+import { useTypedSelector } from '../hooks/useTypedSelector';
 import CurrentWeather from './CurrentWeather';
-// import DashboardBlock from './DashboardBlock';
-// import Error from './Error';
+import DashboardBlock from './DashboardBlock';
+import Error from './Error';
 
 import WeeksWeather from './WeeksWeather';
 
 function Dashboard() {
+  const status = useTypedSelector((state) => state.status);
   return (
     <section className="relative h-4/5">
-      <CurrentWeather />
-      <WeeksWeather />
+      {status === 'active' && (
+        <>
+          <CurrentWeather />
+          <WeeksWeather />
+        </>
+      )}
 
-      {/* <DashboardBlock type="top">
-        <Error />
-      </DashboardBlock> */}
+      {status === 'error' && (
+        <DashboardBlock type="top">
+          <Error />
+        </DashboardBlock>
+      )}
     </section>
   );
 }
