@@ -20,9 +20,7 @@ export function fetchWeather(location: string | null, coords?: Location) {
           `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coords?.latitude}&longitude=${coords?.longitude}`
         );
         const data = await res.json();
-        console.log(data);
         locationName = data.city;
-        console.log(locationName);
       }
 
       if (!coords) {
