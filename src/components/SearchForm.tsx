@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoSearchOutline, IoLocateOutline } from 'react-icons/io5';
 import { useAction } from '../hooks/useAction';
 import Button from './Button';
@@ -8,6 +8,20 @@ function SearchForm() {
   const [locationName, setLocationName] = useState<string>('');
   const [coordinates, setCoordinates] = useState<Location>();
   const { fetchWeather } = useAction();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { coords } = pos;
+
+      setCoordinates((coordinates) => {
+        return {
+          ...coordinates,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+        };
+      });
+    });
+  }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
